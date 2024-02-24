@@ -14,6 +14,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugin": [
+      "@react-native-firebase/app"
+    ],
     "ios": {
       "supportsTablet": true
     },
