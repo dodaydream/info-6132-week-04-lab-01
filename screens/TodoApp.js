@@ -12,7 +12,8 @@ import { FontAwesome as Icon } from '@expo/vector-icons';
 
 // Import Redux and React Redux Dependencies
 import { connect } from 'react-redux';
-import { addTodo, deleteTodo, updateTodo } from '../redux/actions';
+import { addTodo, deleteTodo, updateTodo, getTodos } from '../redux/actions';
+import * as Store from '../firestore/todo';
 
 String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
@@ -73,22 +74,47 @@ const EditableTodoCard = ({ item, handleDeleteTodo, handleUpdateTodo }) => {
   );
 }
 
-const TodoApp = ({ todo_list, addTodo, deleteTodo, updateTodo }) => {
+const TodoApp = ({ todo_list, addTodo, deleteTodo, updateTodo, getTodos }) => {
+
+  React.useEffect(() => {
+    console.debug("useEffect")
+
+    Store.getTodos().then((todos) => {
+      console.log("getTodos", todos)
+      getTodos(todos)
+    })
+  }, [])
+
   const [task, setTask] = React.useState('');
 
   const handleAddTodo = () => {
-    addTodo(task)
+    Store.addTodo({
+      task: task,
+      status: "due"
+    }).then((id) => {
+      console.log("handleAddTodo", id, task)
+      addTodo(id, task)
+    })
     setTask('')
   }
 
   const handleDeleteTodo = (id) => {
-    deleteTodo(id)
+    Store.deleteTodo(id).then(() => {
+      deleteTodo(id)
+    })
   }
 
   const handleUpdateTodo = (id, status, task) => {
     console.log("handleUpdateTodo", id, status, task)
-    updateTodo(id, status, task)
+
+    Store.updateTodo(
+      id,
+      { status, task }
+    ).then(() => {
+      updateTodo(id, status, task)
+    })
   }
+
 
   return (
     <View style={styles.container}>
@@ -151,7 +177,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = { addTodo, deleteTodo, updateTodo }
+const mapDispatchToProps = { addTodo, deleteTodo, updateTodo, getTodos }
 
 export default connect(
   mapStateToProps,

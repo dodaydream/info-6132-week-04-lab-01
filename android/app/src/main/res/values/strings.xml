@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">info-6132-week-04-lab-01-stanley</string>
+  <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
+  <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
+</resources>

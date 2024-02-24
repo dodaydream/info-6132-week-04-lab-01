@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "336771879809",
+    "project_id": "info-6132-week-04-lab-01",
+    "storage_bucket": "info-6132-week-04-lab-01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336771879809:android:488086f444356ffb438e80",
+        "android_client_info": {
+          "package_name": "io.expo.info6132"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVnSfjIuA8MtFgj0vK-AW8lnHz_UQPEZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
